@@ -1,7 +1,5 @@
-﻿using Microsoft.Owin;
-using Owin;
+﻿using Owin;
 
-[assembly: OwinStartupAttribute(typeof(BABWebApp.UI.MVC.Startup))]
 namespace BABWebApp.UI.MVC
 {
     public partial class Startup
