@@ -322,6 +322,9 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
+# Web config
+.BABWebApp.UI.MVC/*.config
+
 # OpenCover UI analysis results
 OpenCover/
 
@@ -348,3 +351,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/BABWebApp.UI.MVC/Web.config
+/BABWebApp.DATA.EF/App.Config

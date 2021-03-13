@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1340
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BABWebApp.UI.MVC", "BABWebApp.UI.MVC\BABWebApp.UI.MVC.csproj", "{C4D0D11C-D1E6-41F0-B3F2-6890F3213A0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BABWebApp.DATA.EF", "BABWebApp.DATA.EF\BABWebApp.DATA.EF.csproj", "{D2CCD0F4-CCCF-43F1-9222-23EF4F775B66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C4D0D11C-D1E6-41F0-B3F2-6890F3213A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4D0D11C-D1E6-41F0-B3F2-6890F3213A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4D0D11C-D1E6-41F0-B3F2-6890F3213A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2CCD0F4-CCCF-43F1-9222-23EF4F775B66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2CCD0F4-CCCF-43F1-9222-23EF4F775B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2CCD0F4-CCCF-43F1-9222-23EF4F775B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2CCD0F4-CCCF-43F1-9222-23EF4F775B66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

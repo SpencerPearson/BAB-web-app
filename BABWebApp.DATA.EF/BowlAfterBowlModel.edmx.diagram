@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0f3a7d96d5ae4ba4b588b455828cf7c3" Name="Diagram1">
+        <EntityTypeShape EntityType="BowlAfterBowlModel.ArtSub" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="BowlAfterBowlModel.AspNetUser" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BowlAfterBowlModel.ClipSub" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BowlAfterBowlModel.Donation" Width="1.5" PointX="8.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="BowlAfterBowlModel.Episode" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BowlAfterBowlModel.Podcast" Width="1.5" PointX="3.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BowlAfterBowlModel.UserDetail" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BowlAfterBowlModel.Chapter" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BowlAfterBowlModel.Soundbite" Width="1.5" PointX="8.25" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="BowlAfterBowlModel.FK_ArtSubs_UserDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="BowlAfterBowlModel.FK_UserDetails_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="BowlAfterBowlModel.FK_ClipSubs_UserDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="BowlAfterBowlModel.FK_Donations_Episodes" ManuallyRouted="false" />
+        <AssociationConnector Association="BowlAfterBowlModel.FK_Donations_UserDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="BowlAfterBowlModel.FK_Chapters_Episodes" ManuallyRouted="false" />
+        <AssociationConnector Association="BowlAfterBowlModel.FK_Episodes_Podcasts" ManuallyRouted="false" />
+        <AssociationConnector Association="BowlAfterBowlModel.FK_Soundbites_Episodes" ManuallyRouted="false" />
+        <AssociationConnector Association="BowlAfterBowlModel.FK_Soundbites_UserDetails" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

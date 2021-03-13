@@ -1,0 +1,762 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BowlAfterBowlModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ArtSubs">
+          <Key>
+            <PropertyRef Name="SubmissionId" />
+          </Key>
+          <Property Name="SubmissionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ArtistId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DateSubmitted" Type="datetime" Nullable="false" />
+          <Property Name="ValueAddress" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BowlAfterBowl.dbo.Chapters' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Chapters">
+          <Key>
+            <PropertyRef Name="EpisodeId" />
+            <PropertyRef Name="StartTime" />
+            <PropertyRef Name="Duration" />
+          </Key>
+          <Property Name="EpisodeId" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Duration" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ClipSubs">
+          <Key>
+            <PropertyRef Name="SubmissionId" />
+          </Key>
+          <Property Name="SubmissionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Clip" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProducerId" Type="nvarchar" MaxLength="128" />
+          <Property Name="SourceName" Type="nvarchar" MaxLength="80" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Duration" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Donations">
+          <Key>
+            <PropertyRef Name="DonationId" />
+          </Key>
+          <Property Name="DonationId" Type="int" Nullable="false" />
+          <Property Name="DonorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateRecieved" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="CurrencyId" Type="nchar" MaxLength="10" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsAnon" Type="bit" Nullable="false" />
+          <Property Name="DonationNote" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EpisodeId" Type="int" Nullable="false" />
+          <Property Name="CreditTo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Episodes">
+          <Key>
+            <PropertyRef Name="EpisodeId" />
+          </Key>
+          <Property Name="EpisodeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PodcastId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Link" Type="nvarchar" MaxLength="100" />
+          <Property Name="Published" Type="datetime" Nullable="false" />
+          <Property Name="Author" Type="nvarchar" MaxLength="80" />
+          <Property Name="Artwork" Type="nvarchar" MaxLength="100" />
+          <Property Name="EpisodeNumber" Type="smallint" Nullable="false" />
+          <Property Name="Duration" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Podcasts">
+          <Key>
+            <PropertyRef Name="PodcastId" />
+          </Key>
+          <Property Name="PodcastId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Link" Type="nvarchar" MaxLength="100" />
+          <Property Name="Docs" Type="nvarchar" MaxLength="100" />
+          <Property Name="Language" Type="nvarchar" MaxLength="10" />
+          <Property Name="Published" Type="datetime" Nullable="false" />
+          <Property Name="ManagingEditor" Type="nvarchar" MaxLength="80" />
+          <Property Name="WebMaster" Type="nvarchar" MaxLength="80" />
+          <Property Name="ImageId" Type="int" />
+          <Property Name="IsLocked" Type="bit" Nullable="false" />
+          <Property Name="Funding" Type="nvarchar" MaxLength="100" />
+          <Property Name="ItunesAuthor" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsExplicit" Type="bit" Nullable="false" />
+          <Property Name="ItunesTypeId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Soundbites">
+          <Key>
+            <PropertyRef Name="EpisodeId" />
+            <PropertyRef Name="StartTime" />
+            <PropertyRef Name="Duration" />
+          </Key>
+          <Property Name="EpisodeId" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Duration" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ProducerId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Nickname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProfileImage" Type="nvarchar" MaxLength="100" />
+          <Property Name="Location" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_ArtSubs_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+          <End Role="ArtSubs" Type="Self.ArtSubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ArtSubs">
+              <PropertyRef Name="ArtistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chapters_Episodes">
+          <End Role="Episodes" Type="Self.Episodes" Multiplicity="1" />
+          <End Role="Chapters" Type="Self.Chapters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Episodes">
+              <PropertyRef Name="EpisodeId" />
+            </Principal>
+            <Dependent Role="Chapters">
+              <PropertyRef Name="EpisodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClipSubs_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="0..1" />
+          <End Role="ClipSubs" Type="Self.ClipSubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ClipSubs">
+              <PropertyRef Name="ProducerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donations_Episodes">
+          <End Role="Episodes" Type="Self.Episodes" Multiplicity="1" />
+          <End Role="Donations" Type="Self.Donations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Episodes">
+              <PropertyRef Name="EpisodeId" />
+            </Principal>
+            <Dependent Role="Donations">
+              <PropertyRef Name="EpisodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donations_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="0..1" />
+          <End Role="Donations" Type="Self.Donations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Donations">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Episodes_Podcasts">
+          <End Role="Podcasts" Type="Self.Podcasts" Multiplicity="1" />
+          <End Role="Episodes" Type="Self.Episodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Podcasts">
+              <PropertyRef Name="PodcastId" />
+            </Principal>
+            <Dependent Role="Episodes">
+              <PropertyRef Name="PodcastId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Soundbites_Episodes">
+          <End Role="Episodes" Type="Self.Episodes" Multiplicity="1" />
+          <End Role="Soundbites" Type="Self.Soundbites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Episodes">
+              <PropertyRef Name="EpisodeId" />
+            </Principal>
+            <Dependent Role="Soundbites">
+              <PropertyRef Name="EpisodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Soundbites_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="0..1" />
+          <End Role="Soundbites" Type="Self.Soundbites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Soundbites">
+              <PropertyRef Name="ProducerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDetails_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BowlAfterBowlModelStoreContainer">
+          <EntitySet Name="ArtSubs" EntityType="Self.ArtSubs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClipSubs" EntityType="Self.ClipSubs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Donations" EntityType="Self.Donations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Episodes" EntityType="Self.Episodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Podcasts" EntityType="Self.Podcasts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chapters" EntityType="Self.Chapters" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Chapters].[EpisodeId] AS [EpisodeId], 
+    [Chapters].[StartTime] AS [StartTime], 
+    [Chapters].[Duration] AS [Duration], 
+    [Chapters].[Title] AS [Title], 
+    [Chapters].[Description] AS [Description]
+    FROM [dbo].[Chapters] AS [Chapters]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Soundbites" EntityType="Self.Soundbites" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Soundbites].[EpisodeId] AS [EpisodeId], 
+    [Soundbites].[StartTime] AS [StartTime], 
+    [Soundbites].[Duration] AS [Duration], 
+    [Soundbites].[Title] AS [Title], 
+    [Soundbites].[Description] AS [Description], 
+    [Soundbites].[ProducerId] AS [ProducerId]
+    FROM [dbo].[Soundbites] AS [Soundbites]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ArtSubs_UserDetails" Association="Self.FK_ArtSubs_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="ArtSubs" EntitySet="ArtSubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chapters_Episodes" Association="Self.FK_Chapters_Episodes">
+            <End Role="Episodes" EntitySet="Episodes" />
+            <End Role="Chapters" EntitySet="Chapters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClipSubs_UserDetails" Association="Self.FK_ClipSubs_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="ClipSubs" EntitySet="ClipSubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donations_Episodes" Association="Self.FK_Donations_Episodes">
+            <End Role="Episodes" EntitySet="Episodes" />
+            <End Role="Donations" EntitySet="Donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donations_UserDetails" Association="Self.FK_Donations_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="Donations" EntitySet="Donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Episodes_Podcasts" Association="Self.FK_Episodes_Podcasts">
+            <End Role="Podcasts" EntitySet="Podcasts" />
+            <End Role="Episodes" EntitySet="Episodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Soundbites_Episodes" Association="Self.FK_Soundbites_Episodes">
+            <End Role="Episodes" EntitySet="Episodes" />
+            <End Role="Soundbites" EntitySet="Soundbites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Soundbites_UserDetails" Association="Self.FK_Soundbites_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="Soundbites" EntitySet="Soundbites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDetails_AspNetUsers" Association="Self.FK_UserDetails_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserDetails" EntitySet="UserDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BowlAfterBowlModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ArtSub">
+          <Key>
+            <PropertyRef Name="SubmissionId" />
+          </Key>
+          <Property Name="SubmissionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ArtistId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateSubmitted" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ValueAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserDetail" Relationship="Self.FK_ArtSubs_UserDetails" FromRole="ArtSubs" ToRole="UserDetails" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserDetail" Relationship="Self.FK_UserDetails_AspNetUsers" FromRole="AspNetUsers" ToRole="UserDetails" />
+        </EntityType>
+        <EntityType Name="ClipSub">
+          <Key>
+            <PropertyRef Name="SubmissionId" />
+          </Key>
+          <Property Name="SubmissionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Clip" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProducerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SourceName" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Duration" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="UserDetail" Relationship="Self.FK_ClipSubs_UserDetails" FromRole="ClipSubs" ToRole="UserDetails" />
+        </EntityType>
+        <EntityType Name="Donation">
+          <Key>
+            <PropertyRef Name="DonationId" />
+          </Key>
+          <Property Name="DonationId" Type="Int32" Nullable="false" />
+          <Property Name="DonorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateRecieved" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="CurrencyId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsAnon" Type="Boolean" Nullable="false" />
+          <Property Name="DonationNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EpisodeId" Type="Int32" Nullable="false" />
+          <Property Name="CreditTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Episode" Relationship="Self.FK_Donations_Episodes" FromRole="Donations" ToRole="Episodes" />
+          <NavigationProperty Name="UserDetail" Relationship="Self.FK_Donations_UserDetails" FromRole="Donations" ToRole="UserDetails" />
+        </EntityType>
+        <EntityType Name="Episode">
+          <Key>
+            <PropertyRef Name="EpisodeId" />
+          </Key>
+          <Property Name="EpisodeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PodcastId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Published" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Author" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Artwork" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EpisodeNumber" Type="Int16" Nullable="false" />
+          <Property Name="Duration" Type="Time" Precision="7" />
+          <NavigationProperty Name="Donations" Relationship="Self.FK_Donations_Episodes" FromRole="Episodes" ToRole="Donations" />
+          <NavigationProperty Name="Chapters" Relationship="Self.FK_Chapters_Episodes" FromRole="Episodes" ToRole="Chapters" />
+          <NavigationProperty Name="Podcast" Relationship="Self.FK_Episodes_Podcasts" FromRole="Episodes" ToRole="Podcasts" />
+          <NavigationProperty Name="Soundbites" Relationship="Self.FK_Soundbites_Episodes" FromRole="Episodes" ToRole="Soundbites" />
+        </EntityType>
+        <EntityType Name="Podcast">
+          <Key>
+            <PropertyRef Name="PodcastId" />
+          </Key>
+          <Property Name="PodcastId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Docs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Published" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ManagingEditor" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="WebMaster" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="ImageId" Type="Int32" />
+          <Property Name="IsLocked" Type="Boolean" Nullable="false" />
+          <Property Name="Funding" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ItunesAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsExplicit" Type="Boolean" Nullable="false" />
+          <Property Name="ItunesTypeId" Type="Int32" />
+          <NavigationProperty Name="Episodes" Relationship="Self.FK_Episodes_Podcasts" FromRole="Podcasts" ToRole="Episodes" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProfileImage" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ArtSubs" Relationship="Self.FK_ArtSubs_UserDetails" FromRole="UserDetails" ToRole="ArtSubs" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserDetails_AspNetUsers" FromRole="UserDetails" ToRole="AspNetUsers" />
+          <NavigationProperty Name="ClipSubs" Relationship="Self.FK_ClipSubs_UserDetails" FromRole="UserDetails" ToRole="ClipSubs" />
+          <NavigationProperty Name="Donations" Relationship="Self.FK_Donations_UserDetails" FromRole="UserDetails" ToRole="Donations" />
+          <NavigationProperty Name="Soundbites" Relationship="Self.FK_Soundbites_UserDetails" FromRole="UserDetails" ToRole="Soundbites" />
+        </EntityType>
+        <EntityType Name="Chapter">
+          <Key>
+            <PropertyRef Name="EpisodeId" />
+            <PropertyRef Name="StartTime" />
+            <PropertyRef Name="Duration" />
+          </Key>
+          <Property Name="EpisodeId" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Duration" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Episode" Relationship="Self.FK_Chapters_Episodes" FromRole="Chapters" ToRole="Episodes" />
+        </EntityType>
+        <EntityType Name="Soundbite">
+          <Key>
+            <PropertyRef Name="EpisodeId" />
+            <PropertyRef Name="StartTime" />
+            <PropertyRef Name="Duration" />
+          </Key>
+          <Property Name="EpisodeId" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Duration" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProducerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Episode" Relationship="Self.FK_Soundbites_Episodes" FromRole="Soundbites" ToRole="Episodes" />
+          <NavigationProperty Name="UserDetail" Relationship="Self.FK_Soundbites_UserDetails" FromRole="Soundbites" ToRole="UserDetails" />
+        </EntityType>
+        <Association Name="FK_ArtSubs_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="1" />
+          <End Role="ArtSubs" Type="Self.ArtSub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ArtSubs">
+              <PropertyRef Name="ArtistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDetails_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClipSubs_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="0..1" />
+          <End Role="ClipSubs" Type="Self.ClipSub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ClipSubs">
+              <PropertyRef Name="ProducerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donations_Episodes">
+          <End Role="Episodes" Type="Self.Episode" Multiplicity="1" />
+          <End Role="Donations" Type="Self.Donation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Episodes">
+              <PropertyRef Name="EpisodeId" />
+            </Principal>
+            <Dependent Role="Donations">
+              <PropertyRef Name="EpisodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donations_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="0..1" />
+          <End Role="Donations" Type="Self.Donation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Donations">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chapters_Episodes">
+          <End Role="Episodes" Type="Self.Episode" Multiplicity="1" />
+          <End Role="Chapters" Type="Self.Chapter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Episodes">
+              <PropertyRef Name="EpisodeId" />
+            </Principal>
+            <Dependent Role="Chapters">
+              <PropertyRef Name="EpisodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Episodes_Podcasts">
+          <End Role="Podcasts" Type="Self.Podcast" Multiplicity="1" />
+          <End Role="Episodes" Type="Self.Episode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Podcasts">
+              <PropertyRef Name="PodcastId" />
+            </Principal>
+            <Dependent Role="Episodes">
+              <PropertyRef Name="PodcastId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Soundbites_Episodes">
+          <End Role="Episodes" Type="Self.Episode" Multiplicity="1" />
+          <End Role="Soundbites" Type="Self.Soundbite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Episodes">
+              <PropertyRef Name="EpisodeId" />
+            </Principal>
+            <Dependent Role="Soundbites">
+              <PropertyRef Name="EpisodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Soundbites_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="0..1" />
+          <End Role="Soundbites" Type="Self.Soundbite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Soundbites">
+              <PropertyRef Name="ProducerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BowlAfterBowlEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ArtSubs" EntityType="Self.ArtSub" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="ClipSubs" EntityType="Self.ClipSub" />
+          <EntitySet Name="Donations" EntityType="Self.Donation" />
+          <EntitySet Name="Episodes" EntityType="Self.Episode" />
+          <EntitySet Name="Podcasts" EntityType="Self.Podcast" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <EntitySet Name="Chapters" EntityType="Self.Chapter" />
+          <EntitySet Name="Soundbites" EntityType="Self.Soundbite" />
+          <AssociationSet Name="FK_ArtSubs_UserDetails" Association="Self.FK_ArtSubs_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="ArtSubs" EntitySet="ArtSubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDetails_AspNetUsers" Association="Self.FK_UserDetails_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserDetails" EntitySet="UserDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClipSubs_UserDetails" Association="Self.FK_ClipSubs_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="ClipSubs" EntitySet="ClipSubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donations_Episodes" Association="Self.FK_Donations_Episodes">
+            <End Role="Episodes" EntitySet="Episodes" />
+            <End Role="Donations" EntitySet="Donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donations_UserDetails" Association="Self.FK_Donations_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="Donations" EntitySet="Donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chapters_Episodes" Association="Self.FK_Chapters_Episodes">
+            <End Role="Episodes" EntitySet="Episodes" />
+            <End Role="Chapters" EntitySet="Chapters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Episodes_Podcasts" Association="Self.FK_Episodes_Podcasts">
+            <End Role="Podcasts" EntitySet="Podcasts" />
+            <End Role="Episodes" EntitySet="Episodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Soundbites_Episodes" Association="Self.FK_Soundbites_Episodes">
+            <End Role="Episodes" EntitySet="Episodes" />
+            <End Role="Soundbites" EntitySet="Soundbites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Soundbites_UserDetails" Association="Self.FK_Soundbites_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="Soundbites" EntitySet="Soundbites" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BowlAfterBowlModelStoreContainer" CdmEntityContainer="BowlAfterBowlEntities">
+          <EntitySetMapping Name="ArtSubs">
+            <EntityTypeMapping TypeName="BowlAfterBowlModel.ArtSub">
+              <MappingFragment StoreEntitySet="ArtSubs">
+                <ScalarProperty Name="SubmissionId" ColumnName="SubmissionId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+                <ScalarProperty Name="DateSubmitted" ColumnName="DateSubmitted" />
+                <ScalarProperty Name="ValueAddress" ColumnName="ValueAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="BowlAfterBowlModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClipSubs">
+            <EntityTypeMapping TypeName="BowlAfterBowlModel.ClipSub">
+              <MappingFragment StoreEntitySet="ClipSubs">
+                <ScalarProperty Name="SubmissionId" ColumnName="SubmissionId" />
+                <ScalarProperty Name="Clip" ColumnName="Clip" />
+                <ScalarProperty Name="ProducerId" ColumnName="ProducerId" />
+                <ScalarProperty Name="SourceName" ColumnName="SourceName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Donations">
+            <EntityTypeMapping TypeName="BowlAfterBowlModel.Donation">
+              <MappingFragment StoreEntitySet="Donations">
+                <ScalarProperty Name="DonationId" ColumnName="DonationId" />
+                <ScalarProperty Name="DonorName" ColumnName="DonorName" />
+                <ScalarProperty Name="DateRecieved" ColumnName="DateRecieved" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsAnon" ColumnName="IsAnon" />
+                <ScalarProperty Name="DonationNote" ColumnName="DonationNote" />
+                <ScalarProperty Name="EpisodeId" ColumnName="EpisodeId" />
+                <ScalarProperty Name="CreditTo" ColumnName="CreditTo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Episodes">
+            <EntityTypeMapping TypeName="BowlAfterBowlModel.Episode">
+              <MappingFragment StoreEntitySet="Episodes">
+                <ScalarProperty Name="EpisodeId" ColumnName="EpisodeId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PodcastId" ColumnName="PodcastId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Artwork" ColumnName="Artwork" />
+                <ScalarProperty Name="EpisodeNumber" ColumnName="EpisodeNumber" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Podcasts">
+            <EntityTypeMapping TypeName="BowlAfterBowlModel.Podcast">
+              <MappingFragment StoreEntitySet="Podcasts">
+                <ScalarProperty Name="PodcastId" ColumnName="PodcastId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Docs" ColumnName="Docs" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="ManagingEditor" ColumnName="ManagingEditor" />
+                <ScalarProperty Name="WebMaster" ColumnName="WebMaster" />
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
+                <ScalarProperty Name="Funding" ColumnName="Funding" />
+                <ScalarProperty Name="ItunesAuthor" ColumnName="ItunesAuthor" />
+                <ScalarProperty Name="IsExplicit" ColumnName="IsExplicit" />
+                <ScalarProperty Name="ItunesTypeId" ColumnName="ItunesTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="BowlAfterBowlModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+                <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chapters">
+            <EntityTypeMapping TypeName="BowlAfterBowlModel.Chapter">
+              <MappingFragment StoreEntitySet="Chapters">
+                <ScalarProperty Name="EpisodeId" ColumnName="EpisodeId" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Soundbites">
+            <EntityTypeMapping TypeName="BowlAfterBowlModel.Soundbite">
+              <MappingFragment StoreEntitySet="Soundbites">
+                <ScalarProperty Name="EpisodeId" ColumnName="EpisodeId" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProducerId" ColumnName="ProducerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
