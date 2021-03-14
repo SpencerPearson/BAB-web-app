@@ -32,6 +32,7 @@ namespace BABWebApp.DATA.EF
         public string Artwork { get; set; }
         public short EpisodeNumber { get; set; }
         public Nullable<System.TimeSpan> Duration { get; set; }
+        public string AudioFile { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Donation> Donations { get; set; }

@@ -34,5 +34,6 @@ namespace BABWebApp.DATA.EF
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<Chapter> Chapters { get; set; }
         public virtual DbSet<Soundbite> Soundbites { get; set; }
+        public virtual DbSet<Currency> Currencies { get; set; }
     }
 }

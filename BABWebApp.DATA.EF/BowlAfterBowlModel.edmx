@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BowlAfterBowlModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BowlAfterBowlModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ArtSubs">
           <Key>
             <PropertyRef Name="SubmissionId" />
@@ -32,14 +32,11 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BowlAfterBowl.dbo.Chapters' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Chapters">
           <Key>
-            <PropertyRef Name="EpisodeId" />
-            <PropertyRef Name="StartTime" />
-            <PropertyRef Name="Duration" />
+            <PropertyRef Name="ChapterId" />
           </Key>
+          <Property Name="ChapterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EpisodeId" Type="int" Nullable="false" />
           <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="Duration" Type="time" Precision="7" Nullable="false" />
@@ -57,6 +54,14 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Chapters' does not have a primar
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Duration" Type="time" Precision="7" Nullable="false" />
         </EntityType>
+        <EntityType Name="Currencies">
+          <Key>
+            <PropertyRef Name="CurrencyId" />
+          </Key>
+          <Property Name="CurrencyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CurrencyName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="CurrencyDescription" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Donations">
           <Key>
             <PropertyRef Name="DonationId" />
@@ -65,7 +70,7 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Chapters' does not have a primar
           <Property Name="DonorName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DateRecieved" Type="datetime" Nullable="false" />
           <Property Name="Amount" Type="int" Nullable="false" />
-          <Property Name="CurrencyId" Type="nchar" MaxLength="10" />
+          <Property Name="CurrencyId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
           <Property Name="IsAnon" Type="bit" Nullable="false" />
           <Property Name="DonationNote" Type="nvarchar(max)" Nullable="false" />
@@ -86,6 +91,7 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Chapters' does not have a primar
           <Property Name="Artwork" Type="nvarchar" MaxLength="100" />
           <Property Name="EpisodeNumber" Type="smallint" Nullable="false" />
           <Property Name="Duration" Type="time" Precision="7" />
+          <Property Name="AudioFile" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Podcasts">
           <Key>
@@ -100,21 +106,18 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Chapters' does not have a primar
           <Property Name="Published" Type="datetime" Nullable="false" />
           <Property Name="ManagingEditor" Type="nvarchar" MaxLength="80" />
           <Property Name="WebMaster" Type="nvarchar" MaxLength="80" />
-          <Property Name="ImageId" Type="int" />
+          <Property Name="Image" Type="nvarchar" MaxLength="100" />
           <Property Name="IsLocked" Type="bit" Nullable="false" />
           <Property Name="Funding" Type="nvarchar" MaxLength="100" />
           <Property Name="ItunesAuthor" Type="nvarchar" MaxLength="50" />
           <Property Name="IsExplicit" Type="bit" Nullable="false" />
           <Property Name="ItunesTypeId" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Soundbites">
           <Key>
-            <PropertyRef Name="EpisodeId" />
-            <PropertyRef Name="StartTime" />
-            <PropertyRef Name="Duration" />
+            <PropertyRef Name="SoundbiteId" />
           </Key>
+          <Property Name="SoundbiteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EpisodeId" Type="int" Nullable="false" />
           <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="Duration" Type="time" Precision="7" Nullable="false" />
@@ -164,6 +167,18 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
             </Principal>
             <Dependent Role="ClipSubs">
               <PropertyRef Name="ProducerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Donations_Currencies">
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="1" />
+          <End Role="Donations" Type="Self.Donations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="CurrencyId" />
+            </Principal>
+            <Dependent Role="Donations">
+              <PropertyRef Name="CurrencyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -242,30 +257,14 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
         <EntityContainer Name="BowlAfterBowlModelStoreContainer">
           <EntitySet Name="ArtSubs" EntityType="Self.ArtSubs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chapters" EntityType="Self.Chapters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClipSubs" EntityType="Self.ClipSubs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Donations" EntityType="Self.Donations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Episodes" EntityType="Self.Episodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Podcasts" EntityType="Self.Podcasts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Soundbites" EntityType="Self.Soundbites" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Chapters" EntityType="Self.Chapters" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Chapters].[EpisodeId] AS [EpisodeId], 
-    [Chapters].[StartTime] AS [StartTime], 
-    [Chapters].[Duration] AS [Duration], 
-    [Chapters].[Title] AS [Title], 
-    [Chapters].[Description] AS [Description]
-    FROM [dbo].[Chapters] AS [Chapters]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Soundbites" EntityType="Self.Soundbites" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Soundbites].[EpisodeId] AS [EpisodeId], 
-    [Soundbites].[StartTime] AS [StartTime], 
-    [Soundbites].[Duration] AS [Duration], 
-    [Soundbites].[Title] AS [Title], 
-    [Soundbites].[Description] AS [Description], 
-    [Soundbites].[ProducerId] AS [ProducerId]
-    FROM [dbo].[Soundbites] AS [Soundbites]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_ArtSubs_UserDetails" Association="Self.FK_ArtSubs_UserDetails">
             <End Role="UserDetails" EntitySet="UserDetails" />
             <End Role="ArtSubs" EntitySet="ArtSubs" />
@@ -277,6 +276,10 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
           <AssociationSet Name="FK_ClipSubs_UserDetails" Association="Self.FK_ClipSubs_UserDetails">
             <End Role="UserDetails" EntitySet="UserDetails" />
             <End Role="ClipSubs" EntitySet="ClipSubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Donations_Currencies" Association="Self.FK_Donations_Currencies">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="Donations" EntitySet="Donations" />
           </AssociationSet>
           <AssociationSet Name="FK_Donations_Episodes" Association="Self.FK_Donations_Episodes">
             <End Role="Episodes" EntitySet="Episodes" />
@@ -303,8 +306,7 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
             <End Role="UserDetails" EntitySet="UserDetails" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BowlAfterBowlModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -357,7 +359,7 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
           <Property Name="DonorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DateRecieved" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Amount" Type="Int32" Nullable="false" />
-          <Property Name="CurrencyId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CurrencyId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="IsAnon" Type="Boolean" Nullable="false" />
           <Property Name="DonationNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -365,6 +367,7 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
           <Property Name="CreditTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Episode" Relationship="Self.FK_Donations_Episodes" FromRole="Donations" ToRole="Episodes" />
           <NavigationProperty Name="UserDetail" Relationship="Self.FK_Donations_UserDetails" FromRole="Donations" ToRole="UserDetails" />
+          <NavigationProperty Name="Currency" Relationship="BowlAfterBowlModel.FK_Donations_Currencies" FromRole="Donation" ToRole="Currency" />
         </EntityType>
         <EntityType Name="Episode">
           <Key>
@@ -384,6 +387,7 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
           <NavigationProperty Name="Chapters" Relationship="Self.FK_Chapters_Episodes" FromRole="Episodes" ToRole="Chapters" />
           <NavigationProperty Name="Podcast" Relationship="Self.FK_Episodes_Podcasts" FromRole="Episodes" ToRole="Podcasts" />
           <NavigationProperty Name="Soundbites" Relationship="Self.FK_Soundbites_Episodes" FromRole="Episodes" ToRole="Soundbites" />
+          <Property Name="AudioFile" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Podcast">
           <Key>
@@ -398,13 +402,13 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
           <Property Name="Published" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ManagingEditor" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="WebMaster" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
-          <Property Name="ImageId" Type="Int32" />
           <Property Name="IsLocked" Type="Boolean" Nullable="false" />
           <Property Name="Funding" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ItunesAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsExplicit" Type="Boolean" Nullable="false" />
           <Property Name="ItunesTypeId" Type="Int32" />
           <NavigationProperty Name="Episodes" Relationship="Self.FK_Episodes_Podcasts" FromRole="Podcasts" ToRole="Episodes" />
+          <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserDetail">
           <Key>
@@ -422,10 +426,9 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
         </EntityType>
         <EntityType Name="Chapter">
           <Key>
-            <PropertyRef Name="EpisodeId" />
-            <PropertyRef Name="StartTime" />
-            <PropertyRef Name="Duration" />
+            <PropertyRef Name="ChapterId" />
           </Key>
+          <Property Name="ChapterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
           <Property Name="EpisodeId" Type="Int32" Nullable="false" />
           <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
           <Property Name="Duration" Type="Time" Nullable="false" Precision="7" />
@@ -435,10 +438,9 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
         </EntityType>
         <EntityType Name="Soundbite">
           <Key>
-            <PropertyRef Name="EpisodeId" />
-            <PropertyRef Name="StartTime" />
-            <PropertyRef Name="Duration" />
+            <PropertyRef Name="SoundbiteId" />
           </Key>
+          <Property Name="SoundbiteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
           <Property Name="EpisodeId" Type="Int32" Nullable="false" />
           <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
           <Property Name="Duration" Type="Time" Nullable="false" Precision="7" />
@@ -602,7 +604,33 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
             <End Role="UserDetails" EntitySet="UserDetails" />
             <End Role="Soundbites" EntitySet="Soundbites" />
           </AssociationSet>
+          <EntitySet Name="Currencies" EntityType="BowlAfterBowlModel.Currency" />
+          <AssociationSet Name="FK_Donations_Currencies" Association="BowlAfterBowlModel.FK_Donations_Currencies">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="Donation" EntitySet="Donations" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="CurrencyId" />
+          </Key>
+          <Property Name="CurrencyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CurrencyName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Donations" Relationship="BowlAfterBowlModel.FK_Donations_Currencies" FromRole="Currency" ToRole="Donation" />
+        </EntityType>
+        <Association Name="FK_Donations_Currencies">
+          <End Type="BowlAfterBowlModel.Currency" Role="Currency" Multiplicity="1" />
+          <End Type="BowlAfterBowlModel.Donation" Role="Donation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyId" />
+            </Principal>
+            <Dependent Role="Donation">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -669,6 +697,7 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
           <EntitySetMapping Name="Episodes">
             <EntityTypeMapping TypeName="BowlAfterBowlModel.Episode">
               <MappingFragment StoreEntitySet="Episodes">
+                <ScalarProperty Name="AudioFile" ColumnName="AudioFile" />
                 <ScalarProperty Name="EpisodeId" ColumnName="EpisodeId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="PodcastId" ColumnName="PodcastId" />
@@ -685,6 +714,7 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
           <EntitySetMapping Name="Podcasts">
             <EntityTypeMapping TypeName="BowlAfterBowlModel.Podcast">
               <MappingFragment StoreEntitySet="Podcasts">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="PodcastId" ColumnName="PodcastId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -694,7 +724,6 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
                 <ScalarProperty Name="Published" ColumnName="Published" />
                 <ScalarProperty Name="ManagingEditor" ColumnName="ManagingEditor" />
                 <ScalarProperty Name="WebMaster" ColumnName="WebMaster" />
-                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
                 <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
                 <ScalarProperty Name="Funding" ColumnName="Funding" />
                 <ScalarProperty Name="ItunesAuthor" ColumnName="ItunesAuthor" />
@@ -716,6 +745,7 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
           <EntitySetMapping Name="Chapters">
             <EntityTypeMapping TypeName="BowlAfterBowlModel.Chapter">
               <MappingFragment StoreEntitySet="Chapters">
+                <ScalarProperty Name="ChapterId" ColumnName="ChapterId" />
                 <ScalarProperty Name="EpisodeId" ColumnName="EpisodeId" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
@@ -727,12 +757,22 @@ warning 6002: The table/view 'BowlAfterBowl.dbo.Soundbites' does not have a prim
           <EntitySetMapping Name="Soundbites">
             <EntityTypeMapping TypeName="BowlAfterBowlModel.Soundbite">
               <MappingFragment StoreEntitySet="Soundbites">
+                <ScalarProperty Name="SoundbiteId" ColumnName="SoundbiteId" />
                 <ScalarProperty Name="EpisodeId" ColumnName="EpisodeId" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ProducerId" ColumnName="ProducerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currencies">
+            <EntityTypeMapping TypeName="BowlAfterBowlModel.Currency">
+              <MappingFragment StoreEntitySet="Currencies">
+                <ScalarProperty Name="CurrencyDescription" ColumnName="CurrencyDescription" />
+                <ScalarProperty Name="CurrencyName" ColumnName="CurrencyName" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

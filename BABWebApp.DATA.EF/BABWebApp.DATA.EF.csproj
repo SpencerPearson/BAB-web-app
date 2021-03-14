@@ -77,6 +77,9 @@
     <Compile Include="ClipSub.cs">
       <DependentUpon>BowlAfterBowlModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Currency.cs">
+      <DependentUpon>BowlAfterBowlModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Donation.cs">
       <DependentUpon>BowlAfterBowlModel.tt</DependentUpon>
     </Compile>

@@ -29,12 +29,12 @@ namespace BABWebApp.DATA.EF
         public System.DateTime Published { get; set; }
         public string ManagingEditor { get; set; }
         public string WebMaster { get; set; }
-        public Nullable<int> ImageId { get; set; }
         public bool IsLocked { get; set; }
         public string Funding { get; set; }
         public string ItunesAuthor { get; set; }
         public bool IsExplicit { get; set; }
         public Nullable<int> ItunesTypeId { get; set; }
+        public string Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Episode> Episodes { get; set; }

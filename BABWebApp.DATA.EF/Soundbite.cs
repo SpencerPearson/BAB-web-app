@@ -14,6 +14,7 @@ namespace BABWebApp.DATA.EF
     
     public partial class Soundbite
     {
+        public int SoundbiteId { get; set; }
         public int EpisodeId { get; set; }
         public System.TimeSpan StartTime { get; set; }
         public System.TimeSpan Duration { get; set; }

@@ -18,7 +18,7 @@ namespace BABWebApp.DATA.EF
         public string DonorName { get; set; }
         public System.DateTime DateRecieved { get; set; }
         public int Amount { get; set; }
-        public string CurrencyId { get; set; }
+        public int CurrencyId { get; set; }
         public string UserId { get; set; }
         public bool IsAnon { get; set; }
         public string DonationNote { get; set; }
@@ -27,5 +27,6 @@ namespace BABWebApp.DATA.EF
     
         public virtual Episode Episode { get; set; }
         public virtual UserDetail UserDetail { get; set; }
+        public virtual Currency Currency { get; set; }
     }
 }
