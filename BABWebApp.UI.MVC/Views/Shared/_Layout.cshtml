@@ -1,49 +1,315 @@
-﻿<!DOCTYPE html>
-<html>
+﻿
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewBag.Title</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="~/Content/style.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,cyrillic' rel='stylesheet' type='text/css'>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link href="~/Content/js/swiperjs/idangerous.swiper.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/js/big-video/css/bigvideo.css">
+    <!-- Client side less compiling
+    <link rel="stylesheet/less" type="text/css" href="style.less">-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="bootstrap-3.0.0/assets/js/html5shiv.js"></script>
+      <script src="bootstrap-3.0.0/assets/js/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+    <!-- BEGIN top bar -->
+    <header class="top-bar">
+        <div class="full-width-info left">Your Tagline Here. / <a href="#">Languages</a></div>
+        <div class="full-width-info right"><!--<a href="#">Login </a>/ <a href="#">Subscribe </a>/ <a href="#">Checkout</a>--></div>
+        <div class="center-info">
+            <div class="bg-player">
+                <a class="player-button forward" href="#">
+                    <span><i class="icon-forward"></i></span>
+                    <span><i class="icon-forward"></i></span>
+                </a>
+                <a class="player-button" href="#">
+                    <span><i class="icon-play"></i></span>
+                    <span><i class="icon-play"></i></span>
+                </a>
+                <a class="player-button backward" href="#">
+                    <span><i class="icon-backward"></i></span>
+                    <span><i class="icon-backward"></i></span>
+                </a>
+                <a class="player-button volume" href="#">
+                    <span><i class="icon-volume-up"></i></span>
+                    <span><i class="icon-volume-up"></i></span>
+                </a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin")) {
-                        <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
-                        <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
-                    }
-                </ul>
-                @Html.Partial("_LoginPartial")
+        </div>
+    </header>
+    <!-- END top bar -->
+    <!-- BEGIN banner area -->
+    <div class="top-banner-area">
+        <a href="#"><img src="~/Content/images/logo.png" alt="Logo"></a>
+        <div class="event-counter bbox-countdown-timer">
+            <div class="event-label">Next Event in:</div>
+            <a class="event-more" href="#">
+                <span>+</span>
+                <span>+</span>
+            </a>
+            <div class="counter">
+                <div class="cell counter-days-wrapper" data-singular="day" data-plural="days">
+                    <strong>24</strong>
+                    <span>days</span>
+                </div>
+                <div class="cell counter-hours-wrapper" data-singular="hour" data-plural="hours">
+                    <strong>20</strong>
+                    <span>hours</span>
+                </div>
+                <div class="cell counter-minutes-wrapper" data-singular="minute" data-plural="minutes">
+                    <strong>26</strong>
+                    <span>minutes</span>
+                </div>
+                <div class="cell counter-seconds-wrapper" data-singular="second" data-plural="seconds">
+                    <strong>10</strong>
+                    <span>seconds</span>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    <!-- END banner area -->
+    <div class="content-wrap">
+        <div class="main-container">
+            <header>
+                <nav>
+                    <ul>
+                        <li class="sub-nav current-item">
+                            <a href="index.html"><i class="icon-home"></i>Home</a>
+                            <ul>
+                                <li><a href="index-video.html">Home + Video Bg</a></li>
+                                <li><a href="index-images.html">Home + Images Bg</a></li>
+                                <li class="subnav">
+                                    <a href="#">Sliders<i class="icon-chevron-right"></i></a>
+                                    <ul>
+                                        <li><a href="default-slider.html">Home + Default Slider</a></li>
+                                        <li><a href="default-wide-slider.html">Home + Wide Slider</a></li>
+                                        <li><a href="alt-slider.html">Home + Alt Slider</a></li>
+                                        <li><a href="alt-wide-slider.html">Home + Wide Alt Slider</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="news.html">News</a>
+                        </li>
+                        <li>
+                            <a href="events.html">Events</a>
+                        </li>
+                        <li>
+                            <a href="band-members.html">Band</a>
+                        </li>
+                        <li>
+                            <a href="discography.html">Discography</a>
+                        </li>
+                        <li>
+                            <a href="video.html">Video</a>
+                        </li>
+                        <li>
+                            <a href="gallery.html">Gallery</a>
+                        </li>
+                        <li>
+                            <a href="audio.html">Audio</a>
+                        </li>
+                        <li class="subnav">
+                            <a href="#">Pages</a>
+                            <ul>
+                                <li><a href="news-single.html">News Single Post</a></li>
+                                <li><a href="events-single.html">Event Post</a></li>
+                                <li><a href="member-single.html">Single Member</a></li>
+                                <li><a href="gallery-single.html">Gallery Post</a></li>
+                                <li><a href="album.html">Album</a></li>
+                                <li><a href="video-single.html">Video Post</a></li>
+                                <li><a href="shortcodes.html">Buttons</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="404.html">404 Error</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+            <!-- BEGIN mobile nav -->
+            <select class="bb-mobile-nav">
+                <option>Item 1</option>
+                <option>Item 2</option>
+                <option>Item 3</option>
+            </select>
+            <!-- END mobile nav -->
+            <span class="clear"></span>
+        </div>
+
+        @RenderBody()
+
+        <!-- BEGIN footer -->
+        <footer>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="bluebox-heading">
+                        <h3>About us</h3>
+                    </div>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vestibulum pellentesque purus eget scelerisque. Mauris tristique, est non feugiat tincidunt, nibh turpis facilisis libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique, est non feugiat tincidunt.
+                    <span class="clear"></span>
+                </div>
+                <div class="col-md-4">
+                    <div class="bluebox-heading">
+                        <h3>News</h3>
+                    </div>
+                    <ul class="news-list">
+                        <li>
+                            <h4><a href="#">Brandon & Leah Premiere “Showstopper”</a></h4>
+                            <span>21 AUG 2013 / 8 COMMENTS</span>
+                        </li>
+                        <li>
+                            <h4><a href="#">From Russia With Beats</a></h4>
+                            <span>6 AUG 2013 / 9 COMMENTS</span>
+                        </li>
+                        <li>
+                            <h4><a href="#">Stream Tedo Stone’s “Good Go Bad”</a></h4>
+                            <span>3 July 2013 / 7 COMMENTS</span>
+                        </li>
+                    </ul>
+                    <span class="clear"></span>
+                </div>
+                <div class="col-md-4">
+                    <div class="bluebox-heading">
+                        <h3>Follow Us</h3>
+                    </div>
+                    <div class="social-widget">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <span><i class="icon-facebook"></i></span>
+                                    <span><i class="icon-facebook"></i></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span><i class="icon-dribbble"></i></span>
+                                    <span><i class="icon-dribbble"></i></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span><i class="icon-instagram"></i></span>
+                                    <span><i class="icon-instagram"></i></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span><i class="icon-twitter"></i></span>
+                                    <span><i class="icon-twitter"></i></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <span class="clear"></span>
+                </div>
+            </div>
+        </footer>
+        <!-- END footer -->
+        <div class="copyrights-content">
+            Banda by Antoni Sinote Botev & Evgeni Dimonni Dimov
+        </div>
+    </div>
+    <div class="footer-logo">
+        <img src="~/Content/images/logo-2.png">
+    </div>
+    <!-- BEGIN sticky player -->
+    <div class="footer-sticky-player">
+        <div class="player-wrap gumm-audio-player" data-src="http://3.s3.envato.com/files/10407161/preview.mp3" data-play-pause-button-mode="toggle" data-playlist-container=".gumm-audio-player-playilst">
+            <div class="track-image">
+                <img src="~/Content/images/demo-image-5.png">
+            </div>
+
+            <div class="description">
+                <h4>Metodi Hristov - Fat Lips (Original Mix)</h4>
+                <span class="track-details">Omg Ep</span>
+                <span class="track-date">18 may 2013</span>
+            </div>
+            <div class="buttons">
+                <div class="buttons-wrap">
+                    <a class="player-button backward" href="#">
+                        <span><i class="icon-backward"></i></span>
+                        <span><i class="icon-backward"></i></span>
+                    </a>
+                    <a class="player-button button-play" href="#">
+                        <span><i class="icon-play"></i></span>
+                        <span><i class="icon-play"></i></span>
+                    </a>
+                    <a class="player-button forward" href="#">
+                        <span><i class="icon-forward"></i></span>
+                        <span><i class="icon-forward"></i></span>
+                    </a>
+                </div>
+                <a href="#" class="track-progress">
+                    <span></span>
+                </a>
+                <div class="volume">
+                    <a href="#" class="volume-link button-mute">
+                        <span><i class="icon-volume-up"></i></span>
+                        <span><i class="icon-volume-up"></i></span>
+                    </a>
+                    <a href="#" class="volume-link button-unmute">
+                        <span><i class="icon-volume-off"></i></span>
+                        <span><i class="icon-volume-off"></i></span>
+                    </a>
+                    <a href="#" class="volume-bar">
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="gumm-audio-player-playilst" style="display:none;">
+                <div data-src="http://3.s3.envato.com/files/10407161/preview.mp3" data-img-src="~/Content/images/demo-image-5.png">
+                    <div class="description">
+                        <h4>Metodi Hristov - Fat Lips (Original Mix)</h4>
+                        <span class="track-details">Omg Ep</span>
+                        <span class="track-date">18 may 2013</span>
+                    </div>
+                </div>
+                <div data-src="http://1.s3.envato.com/files/54821639/preview.mp3" data-img-src="~/Content/images/demo-image-5.png">
+                    <div class="description">
+                        <h4>Test 2</h4>
+                        <span class="track-details">Omg Ep</span>
+                        <span class="track-date">18 may 2013</span>
+                    </div>
+                </div>
+                <div data-src="http://3.s3.envato.com/files/41975807/preview.mp3" data-img-src="~/Content/images/demo-image-5.png">
+                    <div class="description">
+                        <h4>Test 3</h4>
+                        <span class="track-details">Omg Ep</span>
+                        <span class="track-date">18 may 2013</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END sticky player -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="~/Content/bootstrap-3.0.0/assets/js/jquery.js"></script>
+    <script src="~/Content/bootstrap-3.0.0/dist/js/bootstrap.min.js"></script>
+    <script type="~/Content/text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-ui-1.10.3.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/custom.js"></script>
+    <script type="text/javascript" src="~/Content/js/jplayer/jquery.jplayer.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/swiperjs/idangerous.swiper.js"></script>
+    <script src="~/Content/js/modernizr-2.5.3.min.js"></script>
+    <script src="http://vjs.zencdn.net/4.0/video.js"></script>
+    <script src="~/Content/js/big-video/lib/bigvideo.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

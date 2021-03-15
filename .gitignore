@@ -351,5 +351,9 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Added thru VS
 /BABWebApp.UI.MVC/Web.config
 /BABWebApp.DATA.EF/App.Config
+/BABWebApp.UI.MVC/Content/images
+/BABWebApp.UI.MVC/_Archive
