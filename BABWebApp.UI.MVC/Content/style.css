@@ -535,12 +535,12 @@ header.top-bar .right {
 .content-wrap .main-container {
   clear: both;
   padding: 0 40px 40px 40px;
-  background-color: #411A7A;
+  background-color: #8847E6;
   zoom: 1;
   background-color: transparent\9;
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#dbffffff, endColorstr=#dbffffff)";
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#dbffffff, endColorstr=#dbffffff);
-  background-color: rgba(65, 26, 122, 0.86);
+  background-color: rgba(136, 71, 230, 0.86);
   max-width: 960px;
 }
 .content-wrap .main-container img {
@@ -642,8 +642,8 @@ header.top-bar .right {
   display: block;
   top: 25px;
   right: 0px;
-  color: #1F7834;
-  color: rgba(31, 120, 52, 1);
+  color: #30E659;
+  color: rgba(48, 230, 89, 1);
 }
 .content-wrap .main-container header nav ul li:last-child,
 .content-wrap .main-container header nav ul li:last-child a {
@@ -678,8 +678,8 @@ header.top-bar .right {
   box-transition: color 200ms linear;
 }
 .content-wrap .main-container header nav ul li a i {
-  color: #8847E6;
-  color: rgba(136, 71, 230, 1);
+  color: #411A7A;
+  color: rgba(65, 26, 122, 1);
   margin-right: 6px;
 }
 .content-wrap .main-container header nav ul li.sub-nav a:hover {
