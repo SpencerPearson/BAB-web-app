@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Bowl After Bowl Podcast Homepage">
+    <meta name="author" content="Spencer and Laurien">
     <title>@ViewBag.Title</title>
     <!-- Bootstrap core CSS -->
     <link href="~/Content/bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet">
@@ -26,15 +26,16 @@
 <body>
     <!-- BEGIN top bar -->
     <header class="top-bar">
-        <div class="full-width-info left">Your Tagline Here. / <a href="#">Languages</a></div>
-        <div class="full-width-info right"><!--<a href="#">Login </a>/ <a href="#">Subscribe </a>/ <a href="#">Checkout</a>--></div>
+        <div class="full-width-info left"> May Your Bowls Burn Ever Brighter. / <a href="#">Languages</a></div>
+        <div class="full-width-info right">@Html.ActionLink("Login", "Login", "Account")/ <a href="https://feed.podbean.com/bowlafterbowl/feed.xml">RSS Feed </a>/ <a href="#">Checkout</a></div>
         <div class="center-info">
-            <div class="bg-player">
+            <div class="bg-player gumm-audio-player" data-play-pause-button-mode="toggle" data-src="http://stream.bowlafterbowl.com:8000/bowlafterbowl">
+                LISTEN LIVE: &ensp;
                 <a class="player-button forward" href="#">
                     <span><i class="icon-forward"></i></span>
                     <span><i class="icon-forward"></i></span>
                 </a>
-                <a class="player-button" href="#">
+                <a class="player-button button button-play" href="#">
                     <span><i class="icon-play"></i></span>
                     <span><i class="icon-play"></i></span>
                 </a>
@@ -54,12 +55,13 @@
     <div class="top-banner-area">
         <a href="#"><img src="~/Content/images/logo.png" alt="Logo"></a>
         <div class="event-counter bbox-countdown-timer">
-            <div class="event-label">Next Event in:</div>
+            <div class="event-label">Tokin' Tuesday:</div>
             <a class="event-more" href="#">
                 <span>+</span>
                 <span>+</span>
             </a>
             <div class="counter">
+
                 <div class="cell counter-days-wrapper" data-singular="day" data-plural="days">
                     <strong>24</strong>
                     <span>days</span>
@@ -76,6 +78,7 @@
                     <strong>10</strong>
                     <span>seconds</span>
                 </div>
+
             </div>
         </div>
     </div>
